@@ -32,12 +32,15 @@ EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 443/udp 3000/tcp \
 
 RUN mkdir -p /opt/AdGuardHome/conf/
 
-# Copy adguard home config file
-COPY ./AdGuardHome.yaml /opt/AdGuardHome/conf/AdGuardHome.yaml
+# Copy adguard home config file creation script
+COPY ./create_adguard_config.sh /usr/bin/create_adguard_config
+
+# Make script executable
+RUN chmod +x /usr/bin/create_adguard_config
 
 RUN chmod 700 /opt/AdGuardHome
 
 VOLUME /opt/AdGuardHome/conf/
 
 # Command to start both Unbound and AdGuard
-CMD ["bash", "-c", "service unbound start && /opt/AdGuardHome/AdGuardHome -c /opt/AdGuardHome/conf/AdGuardHome.yaml -w /opt/AdGuardHome"]
+CMD ["bash", "-c", "service unbound start && /usr/bin/create_adguard_config && /opt/AdGuardHome/AdGuardHome -c /opt/AdGuardHome/conf/AdGuardHome.yaml -w /opt/AdGuardHome"]
