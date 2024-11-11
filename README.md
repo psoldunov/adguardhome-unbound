@@ -29,15 +29,15 @@ docker run -d \
 
 Once deployed, go to http://YOUR_IP:3000 to complete the set up
 
-## Post instalation instructions
+## Post installation instructions
 
 In AdGuardHome dashboard, go to Settings -> DNS settings.
 
-Under "Upstream DNS servers"
-Set: 127.0.0.1:5335
+Under "Upstream DNS servers":
+**`127.0.0.1:5335`**
 
-Under "DNS cache configuration -> Cache size"
-Leave empty
+Under "DNS cache configuration -> Cache size":
+**`Remove or leave empty`**
 
 ## Aditional Documentation
 
