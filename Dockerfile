@@ -52,4 +52,4 @@ VOLUME /opt/AdGuardHome/work/
 WORKDIR /opt/AdGuardHome/work/
 
 # Command to start both Unbound and AdGuard
-CMD ["bash", "-c", "service unbound start && /usr/bin/create_adguard_config && /opt/AdGuardHome/AdGuardHome -c /opt/AdGuardHome/conf/AdGuardHome.yaml -w /opt/AdGuardHome"]
+CMD ["bash", "-c", "service unbound start && /usr/bin/create_adguard_config && /opt/AdGuardHome/AdGuardHome -c /opt/AdGuardHome/conf/AdGuardHome.yaml -w /opt/AdGuardHome/work"]
