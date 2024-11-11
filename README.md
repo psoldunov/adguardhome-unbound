@@ -27,7 +27,7 @@ docker run -d \
   psoldunov/adguardhome-unbound:latest-arm64 # or -amd64 if you're on x86-64
 ```
 
-Once deployed, go to http://YOUR_IP:3000 to complete the set up
+Once deployed, go to `http://**YOUR_IP**:3000` to complete the set up
 
 ## Post installation instructions
 
