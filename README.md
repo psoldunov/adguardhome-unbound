@@ -1,6 +1,6 @@
 # psoldunov/adguardhome-unbound
 
-Docker image that ships AdGuard Home and Unbound together. Meant to be used as a drop-in replacement for the official AdGuard Home Docker Image.
+Docker image that ships [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) and [Unbound](https://github.com/NLnetLabs/unbound) together. Meant to be used as a drop-in replacement for the official AdGuard Home Docker Image.
 
 ## Installation Guide
 
