@@ -27,8 +27,12 @@ RUN curl -s https://www.internic.net/domain/named.root -o /var/lib/unbound/root.
 # Copy unbound config file
 COPY ./adguardhome.conf /etc/unbound/unbound.conf.d/adguardhome.conf
 
-# Install AdGuard
-RUN curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s --
+# Install AdGuard Home binary directly (install script fails in containers)
+ARG TARGETARCH
+RUN curl -s -S -L "https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_${TARGETARCH}.tar.gz" \
+    -o /tmp/AdGuardHome.tar.gz && \
+    tar -xzf /tmp/AdGuardHome.tar.gz -C /opt/ && \
+    rm /tmp/AdGuardHome.tar.gz
 
 # Expose ports for DNS, AdGuardHome, and DoH
 EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 443/udp 3000/tcp \
