@@ -26,8 +26,23 @@ fi
 
 # Check if the file already exists
 if [ -f "$CONF_FILE" ]; then
-    echo "File '$CONF_FILE' already exists. No change made."
-    # If you want to update the file dynamically, you can add more logic here.
+    echo "File '$CONF_FILE' already exists. Updating credentials..."
+    # Use a temporary file to safely update
+    TMP_FILE=$(mktemp)
+    cat <<EOF > "$TMP_FILE"
+users:
+  - name: $ADGUARD_USERNAME
+    password: $ENCRYPTED_PASSWORD
+dns:
+  bind_hosts:
+    - 0.0.0.0
+  port: 53
+  upstream_dns:
+    - 127.0.0.1:5335
+  cache_size: 0
+EOF
+    mv "$TMP_FILE" "$CONF_FILE"
+    echo "'$CONF_FILE' has been updated with user '$ADGUARD_USERNAME'."
 else
     echo "File '$CONF_FILE' does not exist. Creating it now..."
     # Write content to the AdGuardHome.yaml file with dynamic username and password

@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie-slim
 
 # Set environment variables
 ENV ADGUARD_USERNAME=admin
@@ -6,9 +6,8 @@ ENV ADGUARD_PASSWORD=admin
 
 # Install packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    sudo \
     curl \
-    apache2 \
+    apache2-utils \
     unbound \
     dnsutils \
     ca-certificates && \
@@ -35,7 +34,7 @@ RUN curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/mast
 EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 443/udp 3000/tcp \
        853/tcp 784/udp 853/udp 8853/udp 5443/tcp 5443/udp
 
-RUN mkdir -p /opt/AdGuardHome/conf/ \
+RUN mkdir -p /opt/AdGuardHome/conf/ && \
     mkdir -p /opt/AdGuardHome/work/
 
 # Copy adguard home config file creation script
